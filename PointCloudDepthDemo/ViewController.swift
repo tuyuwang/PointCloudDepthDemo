@@ -67,7 +67,7 @@ class ViewController: UIViewController {
         configuration.planeDetection = .horizontal
         
 //        if ARConfiguration.supportsFrameSemantics(.sceneDepth) {
-            configuration.frameSemantics = .sceneDepth
+        configuration.frameSemantics = [.sceneDepth, .smoothedSceneDepth]
 //        }
         
         sceneView.session.run(configuration)
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 
 extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard let depthMap = frame.sceneDepth?.depthMap else { return }
+        guard let depthMap = frame.smoothedSceneDepth?.depthMap else { return }
         
         let depth_w = CVPixelBufferGetWidth(depthMap)
         let depth_h = CVPixelBufferGetHeight(depthMap)

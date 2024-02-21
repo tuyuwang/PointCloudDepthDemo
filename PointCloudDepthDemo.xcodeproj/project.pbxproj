@@ -14,6 +14,7 @@
 		FA3DB2032B84F7B9004F571F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA3DB2022B84F7B9004F571F /* Assets.xcassets */; };
 		FA3DB2062B84F7B9004F571F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3DB2042B84F7B9004F571F /* LaunchScreen.storyboard */; };
 		FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DB20D2B84F80C004F571F /* PointCloud.swift */; };
+		FA3F54D72B85FCE90018DF90 /* PhotoDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		FA3DB2052B84F7B9004F571F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA3DB2072B84F7B9004F571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA3DB20D2B84F80C004F571F /* PointCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCloud.swift; sourceTree = "<group>"; };
+		FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				FA3DB1F92B84F7B8004F571F /* AppDelegate.swift */,
 				FA3DB1FB2B84F7B8004F571F /* SceneDelegate.swift */,
 				FA3DB1FD2B84F7B8004F571F /* ViewController.swift */,
+				FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */,
 				FA3DB20D2B84F80C004F571F /* PointCloud.swift */,
 				FA3DB1FF2B84F7B8004F571F /* Main.storyboard */,
 				FA3DB2022B84F7B9004F571F /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */,
 				FA3DB1FE2B84F7B8004F571F /* ViewController.swift in Sources */,
 				FA3DB1FA2B84F7B8004F571F /* AppDelegate.swift in Sources */,
+				FA3F54D72B85FCE90018DF90 /* PhotoDepth.swift in Sources */,
 				FA3DB1FC2B84F7B8004F571F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
