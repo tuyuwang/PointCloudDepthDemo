@@ -12,10 +12,21 @@ import AVFoundation
 class PhotoDepthViewController: UIViewController {
     
     var captureSession: AVCaptureSession!
+    var photoOutput: AVCapturePhotoOutput!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupSession()
+        
+        let previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+        previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.frame = view.bounds
+//        view.layer.addSublayer(previewLayer)
+        view.layer.insertSublayer(previewLayer, at: 0)
+    }
+    
+    func setupSession() {
         self.captureSession = AVCaptureSession()
         
         // Select a depth-capable capture device.
@@ -30,7 +41,7 @@ class PhotoDepthViewController: UIViewController {
 
 
         // Set up photo output for depth data capture.
-        let photoOutput = AVCapturePhotoOutput()
+        photoOutput = AVCapturePhotoOutput()
         guard self.captureSession.canAddOutput(photoOutput)
             else { fatalError("Can't add photo output.") }
         self.captureSession.addOutput(photoOutput)
@@ -39,10 +50,14 @@ class PhotoDepthViewController: UIViewController {
         photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
         self.captureSession.commitConfiguration()
         
-        let previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        previewLayer.videoGravity = .resizeAspectFill
-        previewLayer.frame = view.bounds
-        view.layer.addSublayer(previewLayer)
+        
+    }
+    @IBAction func takePhoto(_ sender: Any) {
+        let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+        photoSettings.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+        photoSettings.isDepthDataDeliveryEnabled = true
+        // Shoot the photo, using a custom class to handle capture delegate callbacks.
+        photoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,5 +77,15 @@ class PhotoDepthViewController: UIViewController {
                 self.captureSession.stopRunning()
             }
         }
+    }
+}
+
+extension PhotoDepthViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let depthMap = photo.depthData?.depthDataMap else {
+            return
+        }
+        
+        print(depthMap)
     }
 }
