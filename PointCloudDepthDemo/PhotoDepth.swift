@@ -11,9 +11,10 @@ import AVFoundation
 
 class PhotoDepthViewController: UIViewController {
     
-    var captureSession: AVCaptureSession!
-    var photoOutput: AVCapturePhotoOutput!
-    
+    private var captureSession: AVCaptureSession!
+    private var photoOutput: AVCapturePhotoOutput!
+    private var depthImageView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,13 +25,21 @@ class PhotoDepthViewController: UIViewController {
         previewLayer.frame = view.bounds
 //        view.layer.addSublayer(previewLayer)
         view.layer.insertSublayer(previewLayer, at: 0)
+        
+        depthImageView = UIImageView()
+        depthImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        depthImageView.center = view.center
+        depthImageView.contentMode = .scaleAspectFill
+        view.addSubview(depthImageView)
+    
     }
     
     func setupSession() {
         self.captureSession = AVCaptureSession()
         
         // Select a depth-capable capture device.
-        guard let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,
+        // builtInDualWideCamera、builtInDualCamera
+        guard let videoDevice = AVCaptureDevice.default(.builtInDualCamera,
             for: .video, position: .unspecified)
             else { fatalError("No dual camera.") }
         guard let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice),
@@ -50,12 +59,10 @@ class PhotoDepthViewController: UIViewController {
         photoOutput.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
         self.captureSession.commitConfiguration()
         
-        
     }
     @IBAction func takePhoto(_ sender: Any) {
         let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
         photoSettings.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
-        photoSettings.isDepthDataDeliveryEnabled = true
         // Shoot the photo, using a custom class to handle capture delegate callbacks.
         photoOutput.capturePhoto(with: photoSettings, delegate: self)
     }
@@ -85,6 +92,14 @@ extension PhotoDepthViewController: AVCapturePhotoCaptureDelegate {
         guard let depthMap = photo.depthData?.depthDataMap else {
             return
         }
+        
+        let ciImage = CIImage(depthData: photo.depthData!)
+        let ciContext = CIContext()
+        let cgImage = ciContext.createCGImage(ciImage!, from: ciImage!.extent)
+        
+        let image = UIImage(cgImage: cgImage!, scale: 1, orientation: .right)
+//        let image = UIImage(cgImage: cgImage!)
+        depthImageView.image = image
         
         print(depthMap)
     }
