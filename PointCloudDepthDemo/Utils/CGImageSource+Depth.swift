@@ -93,29 +93,29 @@ extension CGImageSource {
         return nil
     }
 
-    func getSemanticSegmentationMatteData(matteType: AVSemanticSegmentationMatte.MatteType) -> AVSemanticSegmentationMatte? {
-        switch matteType {
-        case .hair:
-            guard let info = semanticSegmentationHairMatteDataInfo else { return nil }
-            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte, dictionaryRepresentation: info)
-        case .skin:
-            guard let info = semanticSegmentationSkinMatteDataInfo else { return nil }
-            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte, dictionaryRepresentation: info)
-        case .teeth:
-            guard let info = semanticSegmentationTeethMatteDataInfo else { return nil }
-            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte, dictionaryRepresentation: info)
-        case .glasses:
-            guard let info = semanticSegmentationGlassesMatteDataInfo else { return nil }
-            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte, dictionaryRepresentation: info)
-        default:
-            fatalError()
-        }
-    }
+//    func getSemanticSegmentationMatteData(matteType: AVSemanticSegmentationMatte.MatteType) -> AVSemanticSegmentationMatte? {
+//        switch matteType {
+//        case .hair:
+//            guard let info = semanticSegmentationHairMatteDataInfo else { return nil }
+//            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte, dictionaryRepresentation: info)
+//        case .skin:
+//            guard let info = semanticSegmentationSkinMatteDataInfo else { return nil }
+//            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte, dictionaryRepresentation: info)
+//        case .teeth:
+//            guard let info = semanticSegmentationTeethMatteDataInfo else { return nil }
+//            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte, dictionaryRepresentation: info)
+//        case .glasses:
+//            guard let info = semanticSegmentationGlassesMatteDataInfo else { return nil }
+//            return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte, dictionaryRepresentation: info)
+//        default:
+//            fatalError()
+//        }
+//    }
 
-    func getSemanticSegmentationSkyMatteData() -> AVSemanticSegmentationMatte? {
-        guard let info = semanticSegmentationSkyMatteDataInfo else { return nil }
-        return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte, dictionaryRepresentation: info)
-    }
+//    func getSemanticSegmentationSkyMatteData() -> AVSemanticSegmentationMatte? {
+//        guard let info = semanticSegmentationSkyMatteDataInfo else { return nil }
+//        return try? AVSemanticSegmentationMatte(fromImageSourceAuxiliaryDataType: kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte, dictionaryRepresentation: info)
+//    }
 
     func getDisparityData() -> AVDepthData? {
         var data: AVDepthData? = nil

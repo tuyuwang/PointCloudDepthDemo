@@ -21,7 +21,8 @@ class PhotoDepthViewController: UIViewController {
     private var currentDrawableSize: CGSize!
     var currentCameraType: CameraType = .back(true)
     private let serialQueue = DispatchQueue(label: "com.photo.depth.queue")
-
+    private let sceneView = ARSCNView()
+    private var captured: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,12 @@ class PhotoDepthViewController: UIViewController {
 ////        view.layer.addSublayer(previewLayer)
 //        view.layer.insertSublayer(previewLayer, at: 0)
         
+        sceneView.frame = view.bounds
+        sceneView.session.delegate = self
+        sceneView.debugOptions = .showWorldOrigin
+        view.insertSubview(sceneView, at: 0)
+        
+        
         depthImageView = UIImageView()
         depthImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         depthImageView.center = view.center
@@ -42,39 +49,7 @@ class PhotoDepthViewController: UIViewController {
         
         
         self.currentDrawableSize = view.frame.size
-        videoCapture = VideoCapture(cameraType: currentCameraType,
-                                    preferredSpec: nil,
-                                    previewContainer: view.layer)
-        
-        videoCapture.syncedDataBufferHandler = { [weak self] videoPixelBuffer, depthData, face in
-            guard let self = self else { return }
-            
-//            self.videoImage = CIImage(cvPixelBuffer: videoPixelBuffer)
-
-            var useDisparity: Bool = false
-            var applyHistoEq: Bool = false
-//            DispatchQueue.main.sync(execute: {
-//                useDisparity = self.disparitySwitch.isOn
-//                applyHistoEq = self.equalizeSwitch.isOn
-//            })
-            
-            
-            self.serialQueue.async {
-        
-                guard let depthData = useDisparity ? depthData?.convertToDisparity() : depthData else { return }
-                
-                guard let ciImage = depthData.depthDataMap.transformedImage(targetSize: self.currentDrawableSize, rotationAngle: 0) else { return }
-                self.depthImage = applyHistoEq ? ciImage.applyingFilter("YUCIHistogramEqualization") : ciImage
-                
-                
-                let ciContext = CIContext()
-                let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)
-                DispatchQueue.main.async {
-                    self.depthImageView.image = UIImage(cgImage: cgImage!)
-                }
-            }
-        }
-        videoCapture.setDepthFilterEnabled(true)
+       
     
     }
     
@@ -104,11 +79,54 @@ class PhotoDepthViewController: UIViewController {
         self.captureSession.commitConfiguration()
         
     }
+    
+    func captureDepthPhoto() {
+//        sceneView.session.pause()
+        videoCapture = VideoCapture(cameraType: currentCameraType,
+                                    preferredSpec: nil,
+                                    previewContainer: nil)
+        
+        videoCapture.syncedDataBufferHandler = { [weak self] videoPixelBuffer, depthData, face in
+            guard let self = self else { return }
+            
+//            self.videoImage = CIImage(cvPixelBuffer: videoPixelBuffer)
+
+            var useDisparity: Bool = false
+            var applyHistoEq: Bool = false
+//            DispatchQueue.main.sync(execute: {
+//                useDisparity = self.disparitySwitch.isOn
+//                applyHistoEq = self.equalizeSwitch.isOn
+//            })
+            
+            
+            self.serialQueue.async {
+        
+                guard let depthData = useDisparity ? depthData?.convertToDisparity() : depthData else { return }
+                
+                guard let ciImage = depthData.depthDataMap.transformedImage(targetSize: self.currentDrawableSize, rotationAngle: 0) else { return }
+                self.depthImage = applyHistoEq ? ciImage.applyingFilter("YUCIHistogramEqualization") : ciImage
+                
+                
+                let ciContext = CIContext()
+                let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)
+                DispatchQueue.main.async {
+                    self.depthImageView.image = UIImage(cgImage: cgImage!)
+                    self.videoCapture.stopCapture()
+                    self.retracking()
+
+                }
+            }
+        }
+        videoCapture.setDepthFilterEnabled(true)
+        videoCapture.startCapture()
+    }
+    
     @IBAction func takePhoto(_ sender: Any) {
-        let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
-        photoSettings.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
-        // Shoot the photo, using a custom class to handle capture delegate callbacks.
-        photoOutput.capturePhoto(with: photoSettings, delegate: self)
+//        let photoSettings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.hevc])
+//        photoSettings.isDepthDataDeliveryEnabled = photoOutput.isDepthDataDeliverySupported
+//        // Shoot the photo, using a custom class to handle capture delegate callbacks.
+//        photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        captureDepthPhoto()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,14 +136,24 @@ class PhotoDepthViewController: UIViewController {
 //                self.captureSession.startRunning()
 //            }
 //        }
-        guard let videoCapture = videoCapture else {return}
-        videoCapture.startCapture()
+//        guard let videoCapture = videoCapture else {return}
+//        videoCapture.startCapture()
+        
+        retracking()
+    }
+    
+    func retracking() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+        sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         guard let videoCapture = videoCapture else {return}
         videoCapture.imageBufferHandler = nil
         videoCapture.stopCapture()
+        
+        sceneView.session.pause()
         
         super.viewWillDisappear(animated)
 //        if captureSession.isRunning {
@@ -157,5 +185,11 @@ extension PhotoDepthViewController: AVCapturePhotoCaptureDelegate {
         depthImageView.image = image
         
         print(depthMap)
+    }
+}
+
+extension PhotoDepthViewController: ARSessionDelegate {
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        
     }
 }
