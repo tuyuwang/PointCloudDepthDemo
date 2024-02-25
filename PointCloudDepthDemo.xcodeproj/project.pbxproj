@@ -15,6 +15,16 @@
 		FA3DB2062B84F7B9004F571F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3DB2042B84F7B9004F571F /* LaunchScreen.storyboard */; };
 		FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DB20D2B84F80C004F571F /* PointCloud.swift */; };
 		FA3F54D72B85FCE90018DF90 /* PhotoDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */; };
+		FA9D9C7B2B89761500FCAE2D /* VideoCameraType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C782B89761500FCAE2D /* VideoCameraType.swift */; };
+		FA9D9C7C2B89761500FCAE2D /* VideoCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C792B89761500FCAE2D /* VideoCapture.swift */; };
+		FA9D9C7D2B89761500FCAE2D /* AVCaptureDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C7A2B89761500FCAE2D /* AVCaptureDevice+Extension.swift */; };
+		FA9D9C862B89779600FCAE2D /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C7F2B89779500FCAE2D /* UIAlertController+Utils.swift */; };
+		FA9D9C872B89779600FCAE2D /* CIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C802B89779500FCAE2D /* CIImage+Utils.swift */; };
+		FA9D9C882B89779600FCAE2D /* AVDepthData+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C812B89779500FCAE2D /* AVDepthData+Utils.swift */; };
+		FA9D9C892B89779600FCAE2D /* CVPixelBuffer+CIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C822B89779500FCAE2D /* CVPixelBuffer+CIImage.swift */; };
+		FA9D9C8A2B89779600FCAE2D /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C832B89779500FCAE2D /* UIImage+Utils.swift */; };
+		FA9D9C8B2B89779600FCAE2D /* CGImageSource+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C842B89779500FCAE2D /* CGImageSource+Depth.swift */; };
+		FA9D9C8C2B89779600FCAE2D /* PhotosUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +38,16 @@
 		FA3DB2072B84F7B9004F571F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA3DB20D2B84F80C004F571F /* PointCloud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointCloud.swift; sourceTree = "<group>"; };
 		FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDepth.swift; sourceTree = "<group>"; };
+		FA9D9C782B89761500FCAE2D /* VideoCameraType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCameraType.swift; sourceTree = "<group>"; };
+		FA9D9C792B89761500FCAE2D /* VideoCapture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCapture.swift; sourceTree = "<group>"; };
+		FA9D9C7A2B89761500FCAE2D /* AVCaptureDevice+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVCaptureDevice+Extension.swift"; sourceTree = "<group>"; };
+		FA9D9C7F2B89779500FCAE2D /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utils.swift"; sourceTree = "<group>"; };
+		FA9D9C802B89779500FCAE2D /* CIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CIImage+Utils.swift"; sourceTree = "<group>"; };
+		FA9D9C812B89779500FCAE2D /* AVDepthData+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVDepthData+Utils.swift"; sourceTree = "<group>"; };
+		FA9D9C822B89779500FCAE2D /* CVPixelBuffer+CIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+CIImage.swift"; sourceTree = "<group>"; };
+		FA9D9C832B89779500FCAE2D /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		FA9D9C842B89779500FCAE2D /* CGImageSource+Depth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImageSource+Depth.swift"; sourceTree = "<group>"; };
+		FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +85,38 @@
 				FA3DB1FD2B84F7B8004F571F /* ViewController.swift */,
 				FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */,
 				FA3DB20D2B84F80C004F571F /* PointCloud.swift */,
+				FA9D9C7E2B89779500FCAE2D /* Utils */,
+				FA9D9C772B89761500FCAE2D /* VideoCapture */,
 				FA3DB1FF2B84F7B8004F571F /* Main.storyboard */,
 				FA3DB2022B84F7B9004F571F /* Assets.xcassets */,
 				FA3DB2042B84F7B9004F571F /* LaunchScreen.storyboard */,
 				FA3DB2072B84F7B9004F571F /* Info.plist */,
 			);
 			path = PointCloudDepthDemo;
+			sourceTree = "<group>";
+		};
+		FA9D9C772B89761500FCAE2D /* VideoCapture */ = {
+			isa = PBXGroup;
+			children = (
+				FA9D9C782B89761500FCAE2D /* VideoCameraType.swift */,
+				FA9D9C792B89761500FCAE2D /* VideoCapture.swift */,
+				FA9D9C7A2B89761500FCAE2D /* AVCaptureDevice+Extension.swift */,
+			);
+			path = VideoCapture;
+			sourceTree = "<group>";
+		};
+		FA9D9C7E2B89779500FCAE2D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FA9D9C7F2B89779500FCAE2D /* UIAlertController+Utils.swift */,
+				FA9D9C802B89779500FCAE2D /* CIImage+Utils.swift */,
+				FA9D9C812B89779500FCAE2D /* AVDepthData+Utils.swift */,
+				FA9D9C822B89779500FCAE2D /* CVPixelBuffer+CIImage.swift */,
+				FA9D9C832B89779500FCAE2D /* UIImage+Utils.swift */,
+				FA9D9C842B89779500FCAE2D /* CGImageSource+Depth.swift */,
+				FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,8 +191,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */,
+				FA9D9C8A2B89779600FCAE2D /* UIImage+Utils.swift in Sources */,
+				FA9D9C872B89779600FCAE2D /* CIImage+Utils.swift in Sources */,
+				FA9D9C882B89779600FCAE2D /* AVDepthData+Utils.swift in Sources */,
+				FA9D9C7C2B89761500FCAE2D /* VideoCapture.swift in Sources */,
 				FA3DB1FE2B84F7B8004F571F /* ViewController.swift in Sources */,
+				FA9D9C7B2B89761500FCAE2D /* VideoCameraType.swift in Sources */,
+				FA9D9C862B89779600FCAE2D /* UIAlertController+Utils.swift in Sources */,
 				FA3DB1FA2B84F7B8004F571F /* AppDelegate.swift in Sources */,
+				FA9D9C7D2B89761500FCAE2D /* AVCaptureDevice+Extension.swift in Sources */,
+				FA9D9C8C2B89779600FCAE2D /* PhotosUtils.swift in Sources */,
+				FA9D9C8B2B89779600FCAE2D /* CGImageSource+Depth.swift in Sources */,
+				FA9D9C892B89779600FCAE2D /* CVPixelBuffer+CIImage.swift in Sources */,
 				FA3F54D72B85FCE90018DF90 /* PhotoDepth.swift in Sources */,
 				FA3DB1FC2B84F7B8004F571F /* SceneDelegate.swift in Sources */,
 			);
@@ -301,7 +357,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4LZF9V2DXV;
+				DEVELOPMENT_TEAM = 64Y6JNQ367;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -309,13 +365,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.tes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nj.t;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -332,7 +388,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4LZF9V2DXV;
+				DEVELOPMENT_TEAM = 64Y6JNQ367;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -340,13 +396,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.tes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nj.t;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

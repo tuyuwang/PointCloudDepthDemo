@@ -8,29 +8,73 @@
 import UIKit
 import ARKit
 import AVFoundation
+import MetalKit
+
 
 class PhotoDepthViewController: UIViewController {
     
     private var captureSession: AVCaptureSession!
     private var photoOutput: AVCapturePhotoOutput!
     private var depthImageView: UIImageView!
+    private var videoCapture: VideoCapture!
+    private var depthImage: CIImage?
+    private var currentDrawableSize: CGSize!
+    var currentCameraType: CameraType = .back(true)
+    private let serialQueue = DispatchQueue(label: "com.photo.depth.queue")
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSession()
+//        setupSession()
         
-        let previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
-        previewLayer.videoGravity = .resizeAspectFill
-        previewLayer.frame = view.bounds
-//        view.layer.addSublayer(previewLayer)
-        view.layer.insertSublayer(previewLayer, at: 0)
+//        let previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+//        previewLayer.videoGravity = .resizeAspectFill
+//        previewLayer.frame = view.bounds
+////        view.layer.addSublayer(previewLayer)
+//        view.layer.insertSublayer(previewLayer, at: 0)
         
         depthImageView = UIImageView()
         depthImageView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         depthImageView.center = view.center
         depthImageView.contentMode = .scaleAspectFill
         view.addSubview(depthImageView)
+        
+        
+        self.currentDrawableSize = view.frame.size
+        videoCapture = VideoCapture(cameraType: currentCameraType,
+                                    preferredSpec: nil,
+                                    previewContainer: view.layer)
+        
+        videoCapture.syncedDataBufferHandler = { [weak self] videoPixelBuffer, depthData, face in
+            guard let self = self else { return }
+            
+//            self.videoImage = CIImage(cvPixelBuffer: videoPixelBuffer)
+
+            var useDisparity: Bool = false
+            var applyHistoEq: Bool = false
+//            DispatchQueue.main.sync(execute: {
+//                useDisparity = self.disparitySwitch.isOn
+//                applyHistoEq = self.equalizeSwitch.isOn
+//            })
+            
+            
+            self.serialQueue.async {
+        
+                guard let depthData = useDisparity ? depthData?.convertToDisparity() : depthData else { return }
+                
+                guard let ciImage = depthData.depthDataMap.transformedImage(targetSize: self.currentDrawableSize, rotationAngle: 0) else { return }
+                self.depthImage = applyHistoEq ? ciImage.applyingFilter("YUCIHistogramEqualization") : ciImage
+                
+                
+                let ciContext = CIContext()
+                let cgImage = ciContext.createCGImage(ciImage, from: ciImage.extent)
+                DispatchQueue.main.async {
+                    self.depthImageView.image = UIImage(cgImage: cgImage!)
+                }
+            }
+        }
+        videoCapture.setDepthFilterEnabled(true)
     
     }
     
@@ -69,21 +113,32 @@ class PhotoDepthViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !self.captureSession.isRunning {
-            DispatchQueue.global().async {
-                self.captureSession.startRunning()
-            }
-        }
-        
+//        if !self.captureSession.isRunning {
+//            DispatchQueue.global().async {
+//                self.captureSession.startRunning()
+//            }
+//        }
+        guard let videoCapture = videoCapture else {return}
+        videoCapture.startCapture()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        guard let videoCapture = videoCapture else {return}
+        videoCapture.imageBufferHandler = nil
+        videoCapture.stopCapture()
+        
         super.viewWillDisappear(animated)
-        if captureSession.isRunning {
-            DispatchQueue.global().async {
-                self.captureSession.stopRunning()
-            }
-        }
+//        if captureSession.isRunning {
+//            DispatchQueue.global().async {
+//                self.captureSession.stopRunning()
+//            }
+//        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let videoCapture = videoCapture else {return}
+        videoCapture.resizePreview()
     }
 }
 
