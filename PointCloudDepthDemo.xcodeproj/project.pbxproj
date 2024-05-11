@@ -25,6 +25,13 @@
 		FA9D9C8A2B89779600FCAE2D /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C832B89779500FCAE2D /* UIImage+Utils.swift */; };
 		FA9D9C8B2B89779600FCAE2D /* CGImageSource+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C842B89779500FCAE2D /* CGImageSource+Depth.swift */; };
 		FA9D9C8C2B89779600FCAE2D /* PhotosUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */; };
+		FAD3A72E2BEF078F00C4EFD6 /* ARDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A72D2BEF078F00C4EFD6 /* ARDataProvider.swift */; };
+		FAD3A7312BEF086900C4EFD6 /* shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7302BEF086900C4EFD6 /* shaders.metal */; };
+		FAD3A7332BEF10F800C4EFD6 /* ARReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7322BEF10F800C4EFD6 /* ARReceiver.swift */; };
+		FAD3A7352BEF118600C4EFD6 /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7342BEF118600C4EFD6 /* EnvironmentVariables.swift */; };
+		FAD3A7372BEF12E000C4EFD6 /* MetalPointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7362BEF12E000C4EFD6 /* MetalPointCloud.swift */; };
+		FAD3A7392BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7382BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift */; };
+		FAD3A73B2BEF140500C4EFD6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A73A2BEF140500C4EFD6 /* MetalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +55,13 @@
 		FA9D9C832B89779500FCAE2D /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		FA9D9C842B89779500FCAE2D /* CGImageSource+Depth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImageSource+Depth.swift"; sourceTree = "<group>"; };
 		FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosUtils.swift; sourceTree = "<group>"; };
+		FAD3A72D2BEF078F00C4EFD6 /* ARDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDataProvider.swift; sourceTree = "<group>"; };
+		FAD3A7302BEF086900C4EFD6 /* shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = shaders.metal; sourceTree = "<group>"; };
+		FAD3A7322BEF10F800C4EFD6 /* ARReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARReceiver.swift; sourceTree = "<group>"; };
+		FAD3A7342BEF118600C4EFD6 /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
+		FAD3A7362BEF12E000C4EFD6 /* MetalPointCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPointCloud.swift; sourceTree = "<group>"; };
+		FAD3A7382BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTextureViewCoefs.swift; sourceTree = "<group>"; };
+		FAD3A73A2BEF140500C4EFD6 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +99,7 @@
 				FA3DB1FD2B84F7B8004F571F /* ViewController.swift */,
 				FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */,
 				FA3DB20D2B84F80C004F571F /* PointCloud.swift */,
+				FAD3A72F2BEF079500C4EFD6 /* Metal */,
 				FA9D9C7E2B89779500FCAE2D /* Utils */,
 				FA9D9C772B89761500FCAE2D /* VideoCapture */,
 				FA3DB1FF2B84F7B8004F571F /* Main.storyboard */,
@@ -117,6 +132,20 @@
 				FA9D9C852B89779500FCAE2D /* PhotosUtils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		FAD3A72F2BEF079500C4EFD6 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				FAD3A72D2BEF078F00C4EFD6 /* ARDataProvider.swift */,
+				FAD3A7322BEF10F800C4EFD6 /* ARReceiver.swift */,
+				FAD3A7302BEF086900C4EFD6 /* shaders.metal */,
+				FAD3A7342BEF118600C4EFD6 /* EnvironmentVariables.swift */,
+				FAD3A7362BEF12E000C4EFD6 /* MetalPointCloud.swift */,
+				FAD3A7382BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift */,
+				FAD3A73A2BEF140500C4EFD6 /* MetalViewController.swift */,
+			);
+			path = Metal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,19 +221,26 @@
 			files = (
 				FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */,
 				FA9D9C8A2B89779600FCAE2D /* UIImage+Utils.swift in Sources */,
+				FAD3A7392BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift in Sources */,
 				FA9D9C872B89779600FCAE2D /* CIImage+Utils.swift in Sources */,
 				FA9D9C882B89779600FCAE2D /* AVDepthData+Utils.swift in Sources */,
+				FAD3A7372BEF12E000C4EFD6 /* MetalPointCloud.swift in Sources */,
 				FA9D9C7C2B89761500FCAE2D /* VideoCapture.swift in Sources */,
 				FA3DB1FE2B84F7B8004F571F /* ViewController.swift in Sources */,
 				FA9D9C7B2B89761500FCAE2D /* VideoCameraType.swift in Sources */,
+				FAD3A72E2BEF078F00C4EFD6 /* ARDataProvider.swift in Sources */,
 				FA9D9C862B89779600FCAE2D /* UIAlertController+Utils.swift in Sources */,
 				FA3DB1FA2B84F7B8004F571F /* AppDelegate.swift in Sources */,
 				FA9D9C7D2B89761500FCAE2D /* AVCaptureDevice+Extension.swift in Sources */,
 				FA9D9C8C2B89779600FCAE2D /* PhotosUtils.swift in Sources */,
 				FA9D9C8B2B89779600FCAE2D /* CGImageSource+Depth.swift in Sources */,
+				FAD3A7332BEF10F800C4EFD6 /* ARReceiver.swift in Sources */,
 				FA9D9C892B89779600FCAE2D /* CVPixelBuffer+CIImage.swift in Sources */,
 				FA3F54D72B85FCE90018DF90 /* PhotoDepth.swift in Sources */,
+				FAD3A7312BEF086900C4EFD6 /* shaders.metal in Sources */,
 				FA3DB1FC2B84F7B8004F571F /* SceneDelegate.swift in Sources */,
+				FAD3A73B2BEF140500C4EFD6 /* MetalViewController.swift in Sources */,
+				FAD3A7352BEF118600C4EFD6 /* EnvironmentVariables.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +393,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 64Y6JNQ367;
+				DEVELOPMENT_TEAM = 4LZF9V2DXV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -371,7 +407,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nj.t;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -388,7 +424,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 64Y6JNQ367;
+				DEVELOPMENT_TEAM = 4LZF9V2DXV;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -402,7 +438,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nj.t;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
