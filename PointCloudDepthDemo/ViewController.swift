@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     
     var sceneView: ARSCNView!
     var pointCloudView: PointCloud!
+    var capturePoints: [simd_float3]?
+    
     private let orientation = UIInterfaceOrientation.landscapeRight
     private lazy var rotateToARCamera = Self.makeRotateToARCameraMatrix(orientation: orientation)
 
@@ -55,10 +57,12 @@ class ViewController: UIViewController {
         sceneView.antialiasingMode = .multisampling4X
         sceneView.autoenablesDefaultLighting = true
         sceneView.debugOptions = .showWorldOrigin
-        view.addSubview(sceneView)
+        view.insertSubview(sceneView, at: 0)
         
         pointCloudView = PointCloud()
         sceneView.scene.rootNode.addChildNode(pointCloudView)
+        
+        
 
     }
     
@@ -77,7 +81,35 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
 
+    @IBAction func captureClick(_ sender: Any) {
+        guard let points = capturePoints else {
+            return
+        }
+        
+        let stringData = points.map { "(\($0.x), \($0.y), \($0.z))" }.joined(separator: ", ")
+    
+        DispatchQueue.global().async {
 
+            let documentsDirectory = FileManager.default.urls(for:.documentDirectory, in:.userDomainMask).first!
+            let date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd-HH-mm-ss"
+            let timestamp = formatter.string(from: date)
+            let name = "pointCloud_\(timestamp).txt"
+            var filePath = documentsDirectory.appendingPathComponent(name)
+
+            do {
+                try stringData.write(to: filePath, atomically: true, encoding: .utf8)
+                print("数据成功写入到沙盒中的文件")
+            } catch {
+                print("写入数据时发生错误: \(error)")
+            }
+        }
+                   
+    }
+    
+    
+    
 }
 
 extension ViewController: ARSessionDelegate {
@@ -127,6 +159,7 @@ extension ViewController: ARSessionDelegate {
             }
             
             pointCloudView.updatePoints(pointCloud)
+            capturePoints = pointCloud
         }
         
         CVPixelBufferUnlockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0))
