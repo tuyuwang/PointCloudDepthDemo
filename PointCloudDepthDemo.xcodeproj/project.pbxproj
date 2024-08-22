@@ -32,6 +32,7 @@
 		FAD3A7372BEF12E000C4EFD6 /* MetalPointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7362BEF12E000C4EFD6 /* MetalPointCloud.swift */; };
 		FAD3A7392BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A7382BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift */; };
 		FAD3A73B2BEF140500C4EFD6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD3A73A2BEF140500C4EFD6 /* MetalViewController.swift */; };
+		FADFB9192C75D64D00F892AF /* PickupObjectsFromImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADFB9182C75D64D00F892AF /* PickupObjectsFromImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		FAD3A7362BEF12E000C4EFD6 /* MetalPointCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPointCloud.swift; sourceTree = "<group>"; };
 		FAD3A7382BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTextureViewCoefs.swift; sourceTree = "<group>"; };
 		FAD3A73A2BEF140500C4EFD6 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		FADFB9182C75D64D00F892AF /* PickupObjectsFromImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupObjectsFromImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				FA3DB1FD2B84F7B8004F571F /* ViewController.swift */,
 				FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */,
 				FA3DB20D2B84F80C004F571F /* PointCloud.swift */,
+				FADFB9182C75D64D00F892AF /* PickupObjectsFromImage.swift */,
 				FAD3A72F2BEF079500C4EFD6 /* Metal */,
 				FA9D9C7E2B89779500FCAE2D /* Utils */,
 				FA9D9C772B89761500FCAE2D /* VideoCapture */,
@@ -221,6 +224,7 @@
 			files = (
 				FA3DB20E2B84F80C004F571F /* PointCloud.swift in Sources */,
 				FA9D9C8A2B89779600FCAE2D /* UIImage+Utils.swift in Sources */,
+				FADFB9192C75D64D00F892AF /* PickupObjectsFromImage.swift in Sources */,
 				FAD3A7392BEF133A00C4EFD6 /* MetalTextureViewCoefs.swift in Sources */,
 				FA9D9C872B89779600FCAE2D /* CIImage+Utils.swift in Sources */,
 				FA9D9C882B89779600FCAE2D /* AVDepthData+Utils.swift in Sources */,
@@ -393,7 +397,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4LZF9V2DXV;
+				DEVELOPMENT_TEAM = 55ZWVMH3DZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -401,13 +405,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -424,7 +428,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4LZF9V2DXV;
+				DEVELOPMENT_TEAM = 55ZWVMH3DZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PointCloudDepthDemo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = use;
@@ -432,13 +436,13 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tuyw.test2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

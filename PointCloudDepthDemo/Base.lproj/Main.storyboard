@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nzZ-0r-WdG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KJ8-bU-bjn">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -51,7 +51,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oH-gO-9Q2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="839" y="-67"/>
+            <point key="canvasLocation" x="1132" y="-14"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="36Z-zS-w37">
@@ -81,6 +81,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V4e-uh-6Ye" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-851" y="-14"/>
+        </scene>
+        <!--Pickup Objects View Controller-->
+        <scene sceneID="eBz-ce-a9h">
+            <objects>
+                <viewController id="KJ8-bU-bjn" customClass="PickupObjectsViewController" customModule="PointCloudDepthDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ir9-bg-4a5">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gkr-hj-mxY">
+                                <rect key="frame" x="0.0" y="624" width="393" height="194"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="194" id="G9m-4C-fwI"/>
+                                </constraints>
+                            </imageView>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdW-5K-EDu">
+                                <rect key="frame" x="0.0" y="59" width="393" height="538"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KJ8-bU-bjn" id="0B6-ut-E3u"/>
+                                </connections>
+                            </arscnView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="C7R-jG-c2Q"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rdW-5K-EDu" firstAttribute="leading" secondItem="Ir9-bg-4a5" secondAttribute="leading" id="IzG-sg-Epx"/>
+                            <constraint firstItem="rdW-5K-EDu" firstAttribute="top" secondItem="C7R-jG-c2Q" secondAttribute="top" id="QMR-AA-5Jo"/>
+                            <constraint firstItem="gkr-hj-mxY" firstAttribute="bottom" secondItem="C7R-jG-c2Q" secondAttribute="bottom" id="W2R-8p-37i"/>
+                            <constraint firstItem="gkr-hj-mxY" firstAttribute="top" secondItem="rdW-5K-EDu" secondAttribute="bottom" constant="27" id="WBo-ez-6Xb"/>
+                            <constraint firstItem="rdW-5K-EDu" firstAttribute="trailing" secondItem="gkr-hj-mxY" secondAttribute="trailing" id="eWX-zV-d7W"/>
+                            <constraint firstItem="rdW-5K-EDu" firstAttribute="leading" secondItem="gkr-hj-mxY" secondAttribute="leading" id="g4G-KH-Nk4"/>
+                            <constraint firstAttribute="trailing" secondItem="rdW-5K-EDu" secondAttribute="trailing" id="rIl-Gv-ykC"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="resultImageView" destination="gkr-hj-mxY" id="W7o-vL-zHh"/>
+                        <outlet property="sceneView" destination="rdW-5K-EDu" id="hMM-e5-Hdo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Czd-4W-ELt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1684.7328244274809" y="35.211267605633807"/>
         </scene>
     </scenes>
     <resources>
