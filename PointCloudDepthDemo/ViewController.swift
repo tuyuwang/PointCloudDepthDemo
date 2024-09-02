@@ -17,7 +17,9 @@ extension Float {
 class ViewController: UIViewController {
     
     var sceneView: ARSCNView!
-    var pointCloudView: PointCloud!
+    var redCloudView: PointCloud!
+    var yellowCloudView: PointCloud!
+    var greenCloudView: PointCloud!
     var capturePoints: [simd_float3]?
     
     private let orientation = UIInterfaceOrientation.landscapeRight
@@ -59,10 +61,17 @@ class ViewController: UIViewController {
         sceneView.debugOptions = .showWorldOrigin
         view.insertSubview(sceneView, at: 0)
         
-        pointCloudView = PointCloud()
-        sceneView.scene.rootNode.addChildNode(pointCloudView)
+        redCloudView = PointCloud()
+        redCloudView.color = .red
+        sceneView.scene.rootNode.addChildNode(redCloudView)
         
+        yellowCloudView = PointCloud()
+        yellowCloudView.color = .yellow
+        sceneView.scene.rootNode.addChildNode(yellowCloudView)
         
+        greenCloudView = PointCloud()
+        greenCloudView.color = .green
+        sceneView.scene.rootNode.addChildNode(greenCloudView)
 
     }
     
@@ -115,7 +124,8 @@ class ViewController: UIViewController {
 extension ViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         guard let depthMap = frame.smoothedSceneDepth?.depthMap else { return }
-        
+        guard let confidenceMap = frame.smoothedSceneDepth?.confidenceMap else { return }
+
         let depth_w = CVPixelBufferGetWidth(depthMap)
         let depth_h = CVPixelBufferGetHeight(depthMap)
         
@@ -136,8 +146,15 @@ extension ViewController: ARSessionDelegate {
         cameraIntrinsics[2][1] /= scaleRes.y
         
         CVPixelBufferLockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0))
-        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depthMap), to: UnsafeMutablePointer<Float>.self)
+        CVPixelBufferLockBaseAddress(confidenceMap, CVPixelBufferLockFlags(rawValue: 0))
 
+        let floatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(depthMap), to: UnsafeMutablePointer<Float>.self)
+        let confidenceFloatBuffer = unsafeBitCast(CVPixelBufferGetBaseAddress(confidenceMap), to: UnsafeMutablePointer<UInt8>.self)
+
+        redCloudView.points.removeAll()
+        yellowCloudView.points.removeAll()
+        greenCloudView.points.removeAll()
+        
         autoreleasepool {
             var pointCloud = [simd_float3]()
             
@@ -145,7 +162,8 @@ extension ViewController: ARSessionDelegate {
                 for x in 0..<depth_w {
         
                     let pixel = floatBuffer[y * bytesPerRow + x]
-                    
+                    let confidence = confidenceFloatBuffer[y * bytesPerRow + x] // 0、1、2 ARConfidenceLevel
+
                     if pixel > 0 {
                         let depth = Float(pixel)
                         
@@ -153,12 +171,30 @@ extension ViewController: ARSessionDelegate {
                         let yw = (Float(y) - cameraIntrinsics[2][1]) * depth / cameraIntrinsics[1][1]
                         let point = simd_float4(x: xw, y: yw, z: depth, w: 1)
                         let pointWorld = localToWorld * point
-                        pointCloud.append(simd_float3(x: pointWorld.x, y: pointWorld.y, z: pointWorld.z))
+                        let point3D = simd_float3(x: pointWorld.x, y: pointWorld.y, z: pointWorld.z)
+                        pointCloud.append(point3D)
+                        
+                        switch confidence {
+                        case 0:
+                            redCloudView.points.append(point3D)
+                            break
+                        case 1:
+                            yellowCloudView.points.append(point3D)
+                            break
+                        case 2:
+                            greenCloudView.points.append(point3D)
+                            break
+                        default:
+                            break
+                        }
                     }
                 }
             }
             
-            pointCloudView.updatePoints(pointCloud)
+            redCloudView.update()
+            yellowCloudView.update()
+            greenCloudView.update()
+            
             capturePoints = pointCloud
         }
         

@@ -11,13 +11,18 @@ import VisionKit
 import ARKit
 
 class PickupObjectsViewController: UIViewController {
-    @IBOutlet weak var resultImageView: UIImageView!
     private var interaction: ImageAnalysisInteraction?
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sceneView: ARSCNView!
+
+    
+    var images: [UIImage] = []
+    
     override func viewDidLoad() {
-         interaction = ImageAnalysisInteraction()
+        interaction = ImageAnalysisInteraction()
         interaction?.preferredInteractionTypes = .imageSubject
+        collectionView.register(ImageCell.self, forCellWithReuseIdentifier: "Cell")
         
 //        interaction.delegate = self
 //        imageView.addInteraction(interaction!)
@@ -37,14 +42,21 @@ class PickupObjectsViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        images.removeAll()
+
         Task {
             await startAnalyzer(image: sceneView.snapshot())
             
 //            let subject = await interaction?.subject(at: sender.location(in: imageView))
-            let subjects = await interaction?.subjects
+//            let subjects = await interaction?.subjects
             
-            
-            resultImageView.image = try? await interaction?.image(for: subjects!)
+            await interaction?.subjects.forEach({ subject in
+                Task {
+                    let image = try? await subject.image
+                    images.append(image!)
+                    collectionView.reloadData()
+                }
+            })
             print("analysis completion")
         }
     }
@@ -68,4 +80,40 @@ extension PickupObjectsViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
         
     }
+}
+
+extension PickupObjectsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImageCell
+        cell.imageView.image = images[indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    
+}
+
+class ImageCell: UICollectionViewCell {
+    var imageView: UIImageView
+    override init(frame: CGRect) {
+        imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        super.init(frame: frame)
+    
+        imageView.frame = contentView.bounds
+        contentView.addSubview(imageView)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
 }

@@ -10,8 +10,11 @@ import ARKit
 
 class PointCloud: SCNNode {
     
-    func updatePoints(_ points: [SIMD3<Float>]) {
-        self.geometry = createVisualization(for: points, color: .red, size: 5)
+    var points: [SIMD3<Float>] = []
+    var color: UIColor = .red
+    
+    func update() {
+        self.geometry = createVisualization(for: points, color: color, size: 5)
     }
     
     func createVisualization(for points: [SIMD3<Float>], color: UIColor, size: CGFloat) -> SCNGeometry? {
