@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA24921D2D6EE3550093D496 /* PickupObjectsFromDiskImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24921C2D6EE3550093D496 /* PickupObjectsFromDiskImage.swift */; };
 		FA3DB1FA2B84F7B8004F571F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DB1F92B84F7B8004F571F /* AppDelegate.swift */; };
 		FA3DB1FC2B84F7B8004F571F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DB1FB2B84F7B8004F571F /* SceneDelegate.swift */; };
 		FA3DB1FE2B84F7B8004F571F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3DB1FD2B84F7B8004F571F /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA24921C2D6EE3550093D496 /* PickupObjectsFromDiskImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupObjectsFromDiskImage.swift; sourceTree = "<group>"; };
 		FA3DB1F62B84F7B8004F571F /* PointCloudDepthDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PointCloudDepthDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3DB1F92B84F7B8004F571F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA3DB1FB2B84F7B8004F571F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				FA3F54D62B85FCE90018DF90 /* PhotoDepth.swift */,
 				FA3DB20D2B84F80C004F571F /* PointCloud.swift */,
 				FADFB9182C75D64D00F892AF /* PickupObjectsFromImage.swift */,
+				FA24921C2D6EE3550093D496 /* PickupObjectsFromDiskImage.swift */,
 				FAD3A72F2BEF079500C4EFD6 /* Metal */,
 				FA9D9C7E2B89779500FCAE2D /* Utils */,
 				FA9D9C772B89761500FCAE2D /* VideoCapture */,
@@ -236,6 +239,7 @@
 				FA9D9C862B89779600FCAE2D /* UIAlertController+Utils.swift in Sources */,
 				FA3DB1FA2B84F7B8004F571F /* AppDelegate.swift in Sources */,
 				FA9D9C7D2B89761500FCAE2D /* AVCaptureDevice+Extension.swift in Sources */,
+				FA24921D2D6EE3550093D496 /* PickupObjectsFromDiskImage.swift in Sources */,
 				FA9D9C8C2B89779600FCAE2D /* PhotosUtils.swift in Sources */,
 				FA9D9C8B2B89779600FCAE2D /* CGImageSource+Depth.swift in Sources */,
 				FAD3A7332BEF10F800C4EFD6 /* ARReceiver.swift in Sources */,

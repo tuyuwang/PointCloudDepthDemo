@@ -72,9 +72,9 @@ class PickupObjectsViewController: UIViewController {
 
 
 
-//extension PickupObjectsViewController: ImageAnalysisInteractionDelegate {
-//    
-//}
+extension PickupObjectsViewController: ImageAnalysisInteractionDelegate {
+    
+}
 
 extension PickupObjectsViewController: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
@@ -105,6 +105,7 @@ class ImageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         super.init(frame: frame)
     
         imageView.frame = contentView.bounds

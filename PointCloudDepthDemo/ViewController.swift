@@ -54,12 +54,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        //init ar view
         sceneView = ARSCNView(frame: view.bounds)
         sceneView.session.delegate = self
-        sceneView.antialiasingMode = .multisampling4X
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.debugOptions = .showWorldOrigin
+        sceneView.debugOptions = [.showWorldOrigin, .showFeaturePoints]
         view.insertSubview(sceneView, at: 0)
+        
+        //run session
+        let configuration = ARWorldTrackingConfiguration()
+        sceneView.session.run(configuration)
+        
         
         redCloudView = PointCloud()
         redCloudView.color = .red
@@ -76,14 +80,14 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.planeDetection = .horizontal
+//        
 //        if ARConfiguration.supportsFrameSemantics(.sceneDepth) {
-        configuration.frameSemantics = [.sceneDepth, .smoothedSceneDepth]
+//            configuration.frameSemantics = [.sceneDepth, .smoothedSceneDepth]
 //        }
-        
-        sceneView.session.run(configuration)
+//        
+//        sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
