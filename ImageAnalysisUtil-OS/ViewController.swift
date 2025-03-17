@@ -107,6 +107,7 @@ class ViewController: NSViewController {
         
         // 遍历处理图片
         var i = 0
+        var s = 0
         let begin = CACurrentMediaTime()
         for file in imageFiles {
             let fullPath = URL(fileURLWithPath: inputPath).appendingPathComponent(file).path
@@ -120,11 +121,12 @@ class ViewController: NSViewController {
                     print("开始分析图像")
                     
                     // 第一阶段：图像分析
-                    await startAnalyzer(image: nsImage, outputPath: outputPath)
+                    let success = await startAnalyzer(image: nsImage, outputPath: outputPath)
                     i = i  + 1
+                    s = success ? s + 1 : s
                     await MainActor.run {
                         progressIndicator.doubleValue = Double(i)
-                        message.stringValue = "处理图片: \(i)/\(imageFiles.count)"
+                        message.stringValue = "处理图片: \(i)/\(imageFiles.count), 成功:\(s)张"
                         if i == imageFiles.count {
                             let time = CACurrentMediaTime() - begin
                             message.stringValue = message.stringValue + "\n" + "结果输出在: \(inputPath)/output"
@@ -150,7 +152,7 @@ class ViewController: NSViewController {
         }
     }
     
-    func startAnalyzer(image: NSImage, outputPath: String) async {
+    func startAnalyzer(image: NSImage, outputPath: String) async -> Bool {
         
         let overlayView = ImageAnalysisOverlayView()
         overlayView.preferredInteractionTypes = [.imageSubject]
@@ -166,7 +168,11 @@ class ViewController: NSViewController {
         if let image = try? await overlayView.subjects.first?.image {
             print("保存图片: \(outputPath)")
             saveImage(image, to: URL(fileURLWithPath: outputPath))
+            return true
         }
+        
+        print("分析失败: \(outputPath)")
+        return false
     }
 
 }
